@@ -1,0 +1,544 @@
+/* ===== FONT & RESET ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== TOÀN TRANG ===== */
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #004d40, #1eb8a1);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Hero section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: url("../image/bg_1.jpg") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    z-index: 1;
+}
+
+.main-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+/* =====================================================
+    BỐ CỤC CHÍNH (SIDE-BY-SIDE: MENU VÒNG TRÒN + CONTENT)
+===================================================== */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px; /* Khoảng cách giữa 2 khối */
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* =====================================================
+            PLANT CAROUSEL (MENU VÒNG TRÒN)
+===================================================== */
+.plant-carousel-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    margin-top: 30px;
+}
+
+.carousel-hint {
+    position: absolute;
+    top: -120px;
+    left: 125px;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.plant-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease; 
+}
+
+.plant-item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+
+    /* === Vòng tròn === */
+    --num-items: 5;
+    --angle: calc(360deg / var(--num-items));
+    --rotate-angle: calc(var(--i) * var(--angle));
+
+    transform: rotate(calc(var(--rotate-angle) - 17deg))
+               translate(190px)
+               rotate(calc(-1 * (var(--rotate-angle) - 17deg)));
+}
+
+.plant-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(calc(var(--rotate-angle) - 17deg))
+               translate(190px) 
+               rotate(calc(-1 * (var(--rotate-angle) - 17deg)))
+               scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.plant-item.active {
+    background: linear-gradient(145deg, #7cb342, #aed581);
+    color: #000;
+    box-shadow: 
+        0 0 25px rgba(124, 179, 66, 0.8),
+        inset 3px 3px 8px rgba(0, 0, 0, 0.3);
+    transform: rotate(calc(var(--rotate-angle) - 17deg))
+               translate(190px) 
+               rotate(calc(-1 * (var(--rotate-angle) - 17deg)))
+               scale(1.1);
+}
+
+.plant-item .emoji {
+    font-size: 2.8rem;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.plant-item .name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* =====================================================
+      KHUNG HIỂN THỊ NỘI DUNG (Content Box)
+===================================================== */
+.content-wrapper {
+    flex-basis: 580px;
+    min-height: 400px;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-box {
+    flex: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px);
+    border-radius: 25px;
+    padding: 30px;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.5s ease;
+}
+
+/* Phần hiển thị thông số đồng bộ */
+.plant-range {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#plantNameShow {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #b3ff77;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(179, 255, 119, 0.5);
+}
+
+.range-info p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#plantTempRange, #plantHumiRange {
+    font-weight: 700;
+    color: #ffeb3b;
+    text-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
+}
+
+.tab-content p {
+    white-space: pre-line;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin-top: 5px;
+}
+
+.tab-content p br + br {
+    display: none;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeInContent 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 0.8rem;
+    background: rgba(0,0,0,0.1);
+    backdrop-filter: blur(6px);
+    z-index: 2;
+}
+
+.carousel-container {
+  perspective: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 350px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.card {
+  position: absolute;
+  width: 220px;
+  height: 280px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  color: #fff;
+  text-align: center;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  transition: all 0.6s ease;
+  cursor: pointer;
+  transform: translateZ(-300px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.card.active {
+  transform: translateZ(200px) scale(1.1);
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 0 35px rgba(0, 255, 200, 0.6);
+}
+
+.card.left1 {
+  transform: translateX(-250px) translateZ(0px) rotateY(20deg);
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+.card.left2 {
+  transform: translateX(-450px) translateZ(-150px) rotateY(35deg);
+  opacity: 0.4;
+}
+
+.card.right1 {
+  transform: translateX(250px) translateZ(0px) rotateY(-20deg);
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+.card.right2 {
+  transform: translateX(450px) translateZ(-150px) rotateY(-35deg);
+  opacity: 0.4;
+}
+
+.card .emoji {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.card:hover {
+  box-shadow: 0 0 25px rgba(255,255,255,0.5);
+}
+
+/* ====== CAROUSEL 3D ====== */
+.carousel-container {
+  perspective: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 350px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+/* ====== CARD HÌNH TRÒN ====== */
+.veg-card {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(16px);
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  transition: all 0.6s ease;
+  cursor: pointer;
+
+  /* hiệu ứng 3D mặc định (xa) */
+  transform: translateZ(-300px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.veg-card .veg-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  max-width: 130px;
+}
+
+.veg-card .veg-icon {
+  font-size: 3.1rem;
+  line-height: 1;
+}
+
+.veg-card .veg-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.1;
+  word-wrap: break-word;
+}
+
+.veg-card.active {
+  transform: translateZ(200px) scale(1.04);
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 0 35px rgba(0, 255, 200, 0.4);
+}
+
+.veg-card.left1 {
+  transform: translateX(-250px) translateZ(0px) rotateY(20deg);
+  opacity: 0.75;
+  pointer-events: auto;
+}
+.veg-card.left2 {
+  transform: translateX(-420px) translateZ(-120px) rotateY(35deg);
+  opacity: 0.35;
+}
+.veg-card.right1 {
+  transform: translateX(250px) translateZ(0px) rotateY(-20deg);
+  opacity: 0.75;
+  pointer-events: auto;
+}
+.veg-card.right2 {
+  transform: translateX(420px) translateZ(-120px) rotateY(-35deg);
+  opacity: 0.35;
+}
+
+.veg-card:hover {
+  box-shadow: 0 0 20px rgba(255,255,255,0.35);
+  transform: scale(1.5)
+}
+
+/* ====== POPUP OVERLAY ====== */
+.veg-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+
+.veg-popup.show {
+  display: flex;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+.veg-popup-content {
+  position: relative;
+  width: min(480px, 92vw);
+  background: rgba(9, 46, 46, 0.95);
+  border-radius: 24px;
+  padding: 60px 30px 30px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.popup-avatar-wrap {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.popup-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #0b2f54;
+  border: 4px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+.veg-popup-content h2 {
+  margin-bottom: 10px;
+}
+
+.veg-popup-content p {
+  margin-bottom: 6px;
+  line-height: 1.4;
+  font-size: 0.97rem;
+}
+
+.avatar-fly {
+  animation: avatarFly 1s ease;
+}
+@keyframes avatarFly {
+  from { transform: translate(0, 10px); opacity: 0; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+
+/* ====== POPUP CONTENT ALIGN ====== */
+
+#popupTemp,
+#popupHumi {
+  text-align: center;
+}
+
+#popupDesc {
+  text-align: left;
+  margin-top: 10px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  color: #e9f7ef;
+  padding: 0 12px;
+}
+
+

@@ -1,0 +1,197 @@
+/* ===== MENU ===== */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-links a:hover {
+  color: black;
+  text-shadow: 0 0 5px rgba(179, 255, 119, 0.5);
+}
+
+.nav-links a.active {
+  color: #000;
+  font-weight: 600;
+  background: linear-gradient(45deg, #f0fff0, #ffffff);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 3px rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+/* ===== LOGOUT BUTTON (LEFT) ===== */
+.logout-btn {
+  position: absolute;
+  left: -55px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(20, 255, 255, 0.5), rgba(230, 12, 240, 0.5));
+  border: 2px solid rgba(0, 90, 60, 0.3);
+  color: #066b42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 50, 30, 0.35);
+  z-index: 10;
+}
+.logout-btn i {
+  color: #fff;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.logout-btn:hover {
+  background: linear-gradient(145deg, rgba(0, 200, 130, 0.25), rgba(0, 150, 90, 0.35));
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 6px 18px rgba(0, 90, 55, 0.45), 0 0 10px rgba(120, 255, 200, 0.6);
+  transform: translateY(-50%) rotate(180deg) scale(1.05);
+}
+.logout-btn:hover i {
+  color: #000;
+}
+
+/* ====== WIFI CARD (TOP-RIGHT) ====== */
+.wifi-card {
+  position: absolute;
+  top: 0;
+  right: -250px;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 6px 8px 8px;
+  z-index: 20;
+  font-size: 0.68rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.wifi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.7rem;
+}
+
+.wifi-card-header i {
+  color: #7cf5ff;
+  font-size: 0.75rem;
+}
+
+.wifi-card-modes {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.wifi-card-modes button {
+  flex: 1 1 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  border-radius: 999px;
+  padding: 3px 0;
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: 0.15s ease-out;
+  border: 1px solid transparent;
+}
+
+.wifi-card-modes button.active {
+  background: linear-gradient(135deg, #7efdd1 0%, #6cf 100%);
+  color: #001e23;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 2px 8px rgba(102, 255, 222, 0.45);
+}
+
+.wifi-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wifi-card-body input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 3px 6px;
+  outline: none;
+  color: #fff;
+  font-size: 0.63rem;
+  width: 100%;
+}
+
+.wifi-card-body input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.wifi-card-body button#wifiSaveBtn {
+  align-self: center;
+  width: 100%;
+  height: 20px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(145deg, #53ffbd, #00bfa5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #001515;
+  transition: 0.15s ease;
+}
+
+.wifi-card-body button#wifiSaveBtn:hover {
+  transform: translateY(-1px);
+}
+
+.wifi-card-hint {
+  margin-top: 5px;
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.45;
+}
+
+/* === 👁️ INPUT WRAP + EYE ICON === */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input {
+  width: 100%;
+  padding-right: 24px; /* chừa chỗ cho icon */
+}
+.toggle-eye {
+  position: absolute;
+  right: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.toggle-eye:hover {
+  color: #7efdd1;
+}

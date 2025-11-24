@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background: radial-gradient(circle at center, #79bcd3 0%, #4b6c8e 55%, #24364d 90%);
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 120px auto 70px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.wrap h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #e3f7ff;
+  text-shadow: 0 0 14px rgba(173, 241, 255, 0.4);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+  margin-bottom: 35px;
+  animation: fadeInTitle 0.8s ease-out;
+}
+
+/* Gạch chân phát sáng như chart-title nhưng to và đậm hơn */
+.wrap h1::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 4px;
+  background: linear-gradient(90deg, #61dafb, #80ffea);
+  border-radius: 8px;
+  box-shadow: 0 0 14px rgba(128, 255, 234, 0.7);
+}
+
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-bottom: 18px;
+}
+
+/* các thông số cho các khung */
+.card {
+  flex: 1 1 200px;
+  max-width: 215px;
+  background: radial-gradient(circle at top, rgba(9,16,28,0.35), rgba(4,7,9,0.05));
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 16px 14px 20px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(3, 12, 28, 0.25);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* viền sáng mờ ở trên */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -25% -10%;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255,255,255,0.22), rgba(255,255,255,0));
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(3, 12, 28, 0.4);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+
+.label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+}
+
+.label i {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+
+.circleChart {
+  display: block;
+  width: 115px !important;
+  height: 115px !important;
+  margin: 6px auto 2px;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+}
+
+.card .circleChart {
+  position: relative;
+  z-index: 2;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85px;
+  height: 85px;
+  background: radial-gradient(circle, rgba(100,200,255,0.22), rgba(0,0,0,0));
+  filter: blur(18px);
+  z-index: 1;
+}
+
+.chart-value {
+  margin-top: 8px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Line charts phía dưới */
+.chart-title {
+  margin-top: 70px;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #e3f7ff;
+  text-shadow: 0 0 14px rgba(173, 241, 255, 0.45);
+  letter-spacing: 0.04em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+.chart-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, #61dafb, #80ffea);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(128, 255, 234, 0.7);
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 26px;
+  margin-top: 28px;
+  padding: 0 10px 80px;
+}
+
+.chart-card {
+  background: rgba(7, 22, 35, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 18px;
+  padding: 18px 16px 14px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+  transition: all 0.25s ease;
+}
+
+.chart-card:hover {
+  background: rgba(10, 38, 57, 0.6);
+  transform: translateY(-4px);
+  border: 1px solid rgba(164, 232, 255, 0.25);
+  box-shadow: 0 16px 38px rgba(0,0,0,0.4);
+}
+
+.chart-card:hover h3 {
+  color: #e0ffef;
+  text-shadow: 0 0 8px rgba(180, 255, 220, 0.7);
+}
+
+.chart-card h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+canvas:not(.circleChart) {
+  width: 100% !important;
+  height: 250px !important;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 0.8rem;
+    background: rgba(0,0,0,0.1);
+    backdrop-filter: blur(6px);
+    z-index: 2;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 30px;
+}
+
+#conn {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  padding: 6px 16px 6px 36px;
+  font-size: 0.8rem;
+  position: relative;
+  letter-spacing: 0.04em;
+}
+
+#conn::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: #ffb347; /* default: connecting */
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255,179,71,0.8);
+}
+
+#conn.online::before {
+  background: #4ade80;
+  box-shadow: 0 0 10px rgba(74,222,128,0.85);
+}
+
+/* ====== FULLSCREEN CHART OVERLAY ====== */
+.fullscreen-chart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 10, 15, 0.45);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+/* hộp chứa chart phóng to */
+.fullscreen-chart-overlay .chart-box {
+  position: relative;
+  background: radial-gradient(circle at top, rgba(10, 24, 35, 0.92), rgba(4, 9, 13, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  width: min(1080px, 100%);
+  height: min(620px, 90vh);
+  padding: 14px 14px 14px 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  /* 👇 hiệu ứng bay lên */
+  animation: chart-pop 0.9s ease;
+  overflow: hidden;
+}
+
+/* canvas chiếm hết chỗ */
+.fullscreen-chart-overlay canvas {
+  flex: 1 1 auto;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* nút đóng dạng X */
+.fullscreen-chart-overlay .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(95, 24, 36, 0.6);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.12s ease-out;
+  backdrop-filter: blur(6px);
+}
+.fullscreen-chart-overlay .close-btn:hover {
+  background: rgba(255, 68, 68, 0.75);
+  transform: scale(1.05);
+}
+
+/* hiệu ứng bay lên */
+@keyframes chart-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(40px);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.03) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-title.plant-inline {
+  margin-top: -10px;     /* thích thì để 6px như cũ */
+  margin-bottom: 20px;
+  text-align: center;    /* 👈 căn giữa */
+  display: block;        /* 👈 bỏ flex để text-align ăn */
+}
+
+.page-title.plant-inline .subtitle {
+  display: inline-block;       /* để nội dung gọn lại ở giữa */
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #d0d5dd;              /* 👈 xám nhạt */
+}
+
+.page-title.plant-inline .subtitle #activePlantName {
+  color: #fff;                 /* tên cây vẫn trắng nổi bật */
+  font-weight: 600;
+}
+
+.page-title.plant-inline .subtitle .sub-range {
+  opacity: 0.9;
+  font-size: 0.8rem;
+  color: #c4cad1;              /* 👈 xám luôn */
+  margin-left: 4px;
+}

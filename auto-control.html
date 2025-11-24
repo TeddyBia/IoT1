@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Panel | Smart Greenhouse</title>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="css/auto-control.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="html/navbar.css" />
+  <link rel="stylesheet" href="html/header.css" />
+  <link rel="stylesheet" href="html/wifi.css" />
+</head>
+
+<body>
+  <header class="header-orange">
+    <div id="navbar"></div>
+  </header>
+
+  <section class="hero">
+    <h1 class="page-title">
+      Automatic Control
+      <span class="subtitle">Time-based misting • Auto interval • Set duration</span>
+    </h1>
+
+    <div class="main-panel">
+      <!-- LEFT PANEL - TIME SCHEDULE -->
+      <div class="panel panel--left" id="scheduleCard">
+        <div class="panel-header">
+          <h2>Time-based misting</h2>
+          <div class="card-status" id="scheduleConnBadge">
+            <span class="status-dot"></span>
+            <span class="status-text">Connecting…</span>
+          </div>
+          <p class="panel-desc">
+            Select time slots during the day for the system to spray automatically
+          </p>
+        </div>
+
+        <div class="switch-row">
+          <label class="toggle">
+            <input type="checkbox" id="scheduleSwitch" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="toggle-text">
+            <h4>Enable schedule</h4>
+            <p>Configure time slots</p>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <label class="input-line">
+            <span>Number of time slots per day</span>
+            <select id="scheduleCount">
+              <option value="1">1 slots</option>
+              <option value="2">2 slots</option>
+              <option value="3" selected>3 slots</option>
+              <option value="4">4 slots</option>
+              <option value="5">5 slots</option>
+            </select>
+          </label>
+
+          <label class="input-line">
+            <span>Default spray duration (seconds)</span>
+            <input type="number" id="defaultDuration" min="1" max="3600" value="10" />
+          </label>
+        </div>
+
+        <div id="scheduleContainer" class="schedule-group">
+          <!-- sẽ được JS sinh ra -->
+        </div>
+
+        <button id="saveSchedule" class="primary-btn">
+          <i class="fa-solid fa-floppy-disk"></i>
+          Save schedule
+        </button>
+
+        <div class="status-box" id="scheduleStatusBox">
+          <p><strong>Today runs:</strong> <span id="scheduleTodayRuns">—</span></p>
+          <p><strong>Next slot:</strong> <span id="scheduleNext">—</span></p>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL - AUTO MISTING (interval) -->
+      <div class="panel panel--right" id="mistingCard">
+        <div class="panel-header">
+          <h2>Auto Misting</h2>
+          <div class="card-status" id="mistingConnBadge">
+            <span class="status-dot"></span>
+            <span class="status-text">Connecting…</span>
+          </div>
+          <p class="panel-desc">Sprays in a repeating cycle</p>
+        </div>
+
+        <div class="switch-row">
+          <label class="toggle">
+            <input type="checkbox" id="autoMode" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="toggle-text">
+            <h4>Enable Auto Mode</h4>
+            <p>System sprays automatically every X minutes</p>
+          </div>
+        </div>
+
+        <div class="inputs" id="mistingInputs">
+          <label class="input-line">
+            <span>Spray interval (minutes)</span>
+            <input type="number" id="sprayInterval" min="1" max="3600" value="5" />
+          </label>
+
+          <label class="input-line">
+            <span>Spray duration (seconds)</span>
+            <input type="number" id="sprayDuration" min="1" max="3600" value="10" />
+          </label>
+
+          <button id="updateMisting" class="primary-btn">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Save misting config
+          </button>
+        </div>
+
+        <div class="status-box">
+          <p id="mistingStatus"><strong>Misting:</strong> OFF</p>
+          <p id="nextRun"><strong>Next run:</strong> —</p>
+          <p id="countdown"><strong>Countdown:</strong> —</p>
+          <button id="testBurst" class="ghost-btn">
+            <i class="fa-solid fa-droplet"></i>
+            Test burst (10s)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS wifi floating -->
+  <div id="wifiMonitor" class="wifi-floating wifi-offline">
+    <div class="wifi-circle">
+      <span class="wifi-bar bar1"></span>
+      <span class="wifi-bar bar2"></span>
+      <span class="wifi-bar bar3"></span>
+      <span class="wifi-dot"></span>
+      <span class="wifi-slash"></span>
+    </div>
+    <div class="wifi-hint" id="wifiHint">WiFi: offline</div>
+  </div>
+
+  <footer>KC326E | Group 6</footer>
+  <div id="toastContainer"></div>
+
+  <!-- JS -->
+  <!-- 1) core firebase -->
+  <script type="module" src="html/firebase-core.js"></script>
+  <!-- 2) load navbar + logout -->
+  <script type="module" src="html/navbar-loader.js"></script>
+  <!-- 3) trang này: auto-control / main -->
+  <script type="module" src="js/auto-control.js"></script>
+  <script type="module" src="html/wifi.js"></script>
+</body>
+</html>

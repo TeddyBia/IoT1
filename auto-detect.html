@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto Control | Firebase</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/auto-detect.css" />
+
+  <!-- Fonts & Icons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Navbar & header (giữ nguyên đường dẫn của bạn) -->
+  <link rel="stylesheet" href="html/navbar.css" />
+  <link rel="stylesheet" href="html/header.css" />
+  <link rel="stylesheet" href="html/wifi.css" />
+</head>
+
+<body>
+  <!-- TOP NAV -->
+  <header class="header-red">
+    <div id="navbar"></div>
+  </header>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Automatic Control by Temperature &amp; Humidity</h1>
+    <p class="subtitle">
+      Define the safe ranges for
+      <span id="activePlantName">this plant</span>
+      <span id="activePlantRanges" class="sub-range">( --°C, --% )</span>
+    </p>
+  </div>
+
+  <!-- GLOBAL TOGGLE -->
+  <div class="mode-toggle-wrap">
+    <span>Auto control</span>
+    <label class="switch">
+      <input type="checkbox" id="rangeModeSwitch" />
+      <span class="slider-round"></span>
+    </label>
+  </div>
+
+  <!-- DASHBOARD -->
+  <main class="dashboard">
+    <!-- LEFT PANEL -->
+    <section class="left-panel">
+      <!-- TEMPERATURE CARD -->
+      <div class="card temperature">
+        <div class="card-header">
+          <div class="card-title-block">
+            <span class="icon">🌡</span>
+            <div>
+              <h2>Temperature (°C)</h2>
+              <p class="card-sub">Set min / max range</p>
+            </div>
+          </div>
+          <!-- connection pill -->
+          <div class="conn-pill" data-card="temp">
+            <span class="dot"></span>
+            <span class="text">Connecting…</span>
+          </div>
+        </div>
+
+        <div class="slider">
+          <div class="slider-track"></div>
+          <input
+            type="range"
+            id="Tsetmin"
+            min="0"
+            max="50"
+            value="20"
+            step="0.5"
+          />
+          <input
+            type="range"
+            id="Tsetmax"
+            min="0"
+            max="50"
+            value="30"
+            step="0.5"
+          />
+        </div>
+
+        <!-- text-input mới -->
+        <div class="range-inputs">
+          <div class="range-input-group">
+            <label for="TminInput">Min</label>
+            <input
+              type="number"
+              id="TminInput"
+              min="0"
+              max="50"
+              step="1"
+              value="20"
+            />
+          </div>
+          <div class="range-input-group">
+            <label for="TmaxInput">Max</label>
+            <input
+              type="number"
+              id="TmaxInput"
+              min="0"
+              max="50"
+              step="1"
+              value="30"
+            />
+          </div>
+        </div>
+
+        <p class="live-label">
+          Current temperature:
+          <strong id="Tnow">--</strong> °C
+        </p>
+      </div>
+
+      <!-- HUMIDITY CARD -->
+      <div class="card humidity">
+        <div class="card-header">
+          <div class="card-title-block">
+            <span class="icon">💧</span>
+            <div>
+              <h2>Humidity (%)</h2>
+              <p class="card-sub">Set min / max range</p>
+            </div>
+          </div>
+          <!-- connection pill -->
+          <div class="conn-pill" data-card="humid">
+            <span class="dot"></span>
+            <span class="text">Connecting…</span>
+          </div>
+        </div>
+
+        <div class="slider">
+          <div class="slider-track"></div>
+          <input
+            type="range"
+            id="Msetmin"
+            min="0"
+            max="100"
+            value="50"
+            step="0.5"
+          />
+          <input
+            type="range"
+            id="Msetmax"
+            min="0"
+            max="100"
+            value="80"
+            step="0.5"
+          />
+        </div>
+
+        <!-- text-input mới -->
+        <div class="range-inputs">
+          <div class="range-input-group">
+            <label for="MminInput">Min</label>
+            <input
+              type="number"
+              id="MminInput"
+              min="0"
+              max="100"
+              step="0.1"
+              value="50"
+            />
+          </div>
+          <div class="range-input-group">
+            <label for="MmaxInput">Max</label>
+            <input
+              type="number"
+              id="MmaxInput"
+              min="0"
+              max="100"
+              step="0.1"
+              value="80"
+            />
+          </div>
+        </div>
+
+        <p class="live-label">
+          Current humidity:
+          <strong id="Mnow">--</strong> %
+        </p>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel">
+      <div class="card status">
+        <div class="card-header">
+          <div class="card-title-block">
+            <span class="icon">⚙️</span>
+            <div>
+              <h2>Actuator status</h2>
+              <p class="card-sub">Auto-updates from Firebase</p>
+            </div>
+          </div>
+          <!-- connection pill -->
+          <div class="conn-pill" data-card="actuator">
+            <span class="dot"></span>
+            <span class="text">Connecting…</span>
+          </div>
+        </div>
+
+        <div class="actuator-list">
+          <div class="actuator">
+            <span>💡 LED</span>
+            <span id="LedA" class="state off">0</span>
+          </div>
+          <div class="actuator">
+            <span>🌀 FAN</span>
+            <span id="FanA" class="state off">0</span>
+          </div>
+          <div class="actuator">
+            <span>💦 MIST</span>
+            <span id="MistingA" class="state off">0</span>
+          </div>
+          <div class="actuator">
+            <span>⚙️ SERVO</span>
+            <span id="ServoA" class="state off">0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JS wifi floating -->
+  <div id="wifiMonitor" class="wifi-floating wifi-offline">
+    <div class="wifi-circle">
+      <span class="wifi-bar bar1"></span>
+      <span class="wifi-bar bar2"></span>
+      <span class="wifi-bar bar3"></span>
+      <span class="wifi-dot"></span>
+      <span class="wifi-slash"></span>
+    </div>
+    <div class="wifi-hint" id="wifiHint">WiFi: offline</div>
+  </div>
+
+  <footer>KC326E | Group 6</footer>
+
+  <!-- JS -->
+  <!-- 1) core firebase -->
+  <script type="module" src="html/firebase-core.js"></script>
+  <!-- 2) load navbar + logout -->
+  <script type="module" src="html/navbar-loader.js"></script>
+  <script type="module" src="js/auto-detect.js"></script>
+  <script type="module" src="html/wifi.js"></script>
+</body>
+</html>

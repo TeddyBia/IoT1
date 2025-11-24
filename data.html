@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📊 Data Monitor | Garden Detect</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
+
+  <link rel="stylesheet" href="css/data.css">
+  <link rel="stylesheet" href="html/navbar.css">
+  <link rel="stylesheet" href="html/header.css">
+  <link rel="stylesheet" href="html/wifi.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+  <header class="header-mint">
+    <div id="navbar"></div>
+  </header>
+
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <h1>Garden Detection Data</h1>
+        <p class="subtitle">Live data from IoT greenhouse · KC326E</p>
+      </div>
+      <span class="badge-online">
+        <span class="dot"></span>Realtime
+      </span>
+    </div>
+
+    <!-- PANEL 1: DETECT -->
+    <div class="card data-panel" data-panel="detect">
+      <div class="btn-row">
+        <button class="btn-export" data-filename="detect">Export Excel</button>
+        <button class="btn-export-all">Export All</button>
+      </div>
+
+      <div class="card-head">
+        <h2><i class="fa-solid fa-bug"></i> Detection stream</h2>
+        <p class="card-desc">Last 1000 rows from SQL Server</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Area 1</th>
+            <th>Area 2</th>
+            <th>Area 3</th>
+            <th>Area 4</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-detect"></tbody>
+      </table>
+    </div>
+
+    <!-- PANEL 2: EVENTS -->
+    <div class="card data-panel hidden" data-panel="events">
+      <div class="btn-row">
+        <button class="btn-export" data-filename="events">Export Excel</button>
+        <button class="btn-export-all">Export All</button>
+      </div>
+
+      <div class="card-head">
+        <h2><i class="fa-solid fa-seedling"></i> Plant &amp; sensor</h2>
+        <p class="card-desc">Values Sensor</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Plant</th>
+            <th>Tmin</th>
+            <th>Tmax</th>
+            <th>Hmin</th>
+            <th>Hmax</th>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>LDR</th>
+            <th>Air Quality</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-events"></tbody>
+      </table>
+    </div>
+
+    <!-- PANEL 3: LOGIN -->
+    <div class="card data-panel hidden" data-panel="login">
+      <div class="btn-row">
+        <button class="btn-export" data-filename="login">Export Excel</button>
+        <button class="btn-export-all">Export All</button>
+      </div>
+
+      <div class="card-head">
+        <h2><i class="fa-solid fa-user-shield"></i> Login activity</h2>
+        <p class="card-desc">Latest signin state in Web</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-login"></tbody>
+      </table>
+    </div>
+
+    <!-- PANEL 4: WIFI -->
+    <div class="card data-panel hidden" data-panel="wifi">
+      <div class="btn-row">
+        <button class="btn-export" data-filename="wifi">Export Excel</button>
+        <button class="btn-export-all">Export All</button>
+      </div>
+
+      <div class="card-head">
+        <h2><i class="fa-solid fa-wifi"></i> Wi-Fi list</h2>
+        <p class="card-desc">Realtime wifi in ESP32 Flash</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Key</th>
+            <th>SSID</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-wifi"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="wifiMonitor" class="wifi-floating wifi-offline">
+    <div class="wifi-circle">
+      <span class="wifi-bar bar1"></span>
+      <span class="wifi-bar bar2"></span>
+      <span class="wifi-bar bar3"></span>
+      <span class="wifi-dot"></span>
+      <span class="wifi-slash"></span>
+    </div>
+    <div class="wifi-hint" id="wifiHint">WiFi: offline</div>
+  </div>
+
+  <footer>KC326E | Group 6</footer>
+
+  <script type="module" src="html/firebase-core.js"></script>
+  <script type="module" src="html/navbar-loader.js"></script>
+  <script type="module" src="html/wifi.js"></script>
+
+  <script src="js/data.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sensor Realtime</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/state.css" />
+  <link rel="stylesheet" href="html/navbar.css" />
+  <link rel="stylesheet" href="html/header.css" />
+  <link rel="stylesheet" href="html/wifi.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="header-purple">
+    <div id="navbar"></div>
+  </header>
+
+  <main class="wrap">
+    <h1>Sensor Values Realtime</h1>
+
+    <div class="page-title plant-inline">
+      <p class="subtitle">
+        Safe ranges for
+        <span id="activePlantName">this plant</span>
+        <span id="activePlantRanges" class="sub-range">( --°C, --% )</span>
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">🌡 Temperature (°C)</div>
+        <canvas id="TemperatureChart" class="circleChart"></canvas>
+        <div class="chart-value" id="TemperatureVal">-- °C</div>
+      </div>
+
+      <div class="card">
+        <div class="label">💧 Humidity (%)</div>
+        <canvas id="HumminityChart" class="circleChart"></canvas>
+        <div class="chart-value" id="HumminityVal">-- %</div>
+      </div>
+
+      <div class="card">
+        <div class="label">🔆 LDR (Light)</div>
+        <canvas id="LDRChart" class="circleChart"></canvas>
+        <div class="chart-value" id="LDRVal">-- lux</div>
+      </div>
+
+      <div class="card">
+        <div class="label">🌫 Air Quality</div>
+        <canvas id="AirQualityChart" class="circleChart"></canvas>
+        <div class="chart-value" id="AirQualityVal">-- AQI</div>
+      </div>
+
+      <div class="card">
+        <div class="label">🚰 Water Level</div>
+        <canvas id="WaterLevelChart" class="circleChart"></canvas>
+        <div class="chart-value" id="WaterLevelVal">-- %</div>
+      </div>
+    </div>
+
+    <div class="status">
+      <span id="conn">Connecting…</span>
+    </div>
+
+    <h1 class="chart-title">Sensor Graphs</h1>
+
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h3>🌡 Temperature (°C)</h3>
+        <canvas id="tempChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>💧 Humidity (%)</h3>
+        <canvas id="humidityChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>☀️ LDR (Light)</h3>
+        <canvas id="ldrChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>🌫 Air Quality</h3>
+        <canvas id="airChart"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <div id="wifiMonitor" class="wifi-floating wifi-offline">
+    <div class="wifi-circle">
+      <span class="wifi-bar bar1"></span>
+      <span class="wifi-bar bar2"></span>
+      <span class="wifi-bar bar3"></span>
+      <span class="wifi-dot"></span>
+      <span class="wifi-slash"></span>
+    </div>
+    <div class="wifi-hint" id="wifiHint">WiFi: offline</div>
+  </div>
+
+  <footer>KC326E | Nhóm 6</footer>
+
+  <script type="module" src="html/firebase-core.js"></script>
+  <script type="module" src="html/navbar-loader.js"></script>
+  <script type="module" src="js/state.js"></script>
+  <script type="module" src="html/wifi.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Control</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/car-control.css" />
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="html/navbar.css" />
+  <link rel="stylesheet" href="html/header.css" />
+  <link rel="stylesheet" href="html/wifi.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header-sunrise">
+    <div id="navbar"></div>
+  </header>
+
+  <section class="hero">
+    <h1 class="page-title">Car Control</h1>
+    <p class="page-subtitle">Directional drive with dual-key combos, single PWM, and lights.</p>
+
+    <div class="main-panel" style="grid-template-columns:1fr;max-width:640px;">
+      <div class="left-col">
+        <div class="glass-card control-panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Manual Control</h2>
+            <p id="carStatus" class="status-pill waiting">
+              <span class="dot"></span> Waiting
+            </p>
+          </div>
+
+          <!-- D-Pad -->
+          <div class="dpad">
+            <button class="d d-up" data-move="forward" title="Forward">
+              <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <div class="d-row">
+              <button class="d d-left" data-move="left" title="Left">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <button class="d d-stop" data-move="stop" title="Stop">
+                <i class="fa-solid fa-square"></i>
+              </button>
+              <button class="d d-right" data-move="right" title="Right">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <button class="d d-down" data-move="back" title="Back">
+              <i class="fa-solid fa-arrow-down"></i>
+            </button>
+          </div>
+          <p class="hint">
+            Dùng W/A/S/D hoặc phím mũi tên. Hỗ trợ nhấn <b>2 phím cùng lúc</b> (W+D, W+A, S+D, S+A). Space/X để dừng nhanh.
+          </p>
+
+          <!-- PWM (single slider) -->
+          <div class="slider-box">
+            <label for="pwmRange">
+              PWM Output
+              <span id="pwmVal" class="value-badge">0%</span>
+            </label>
+            <div class="slider-group single">
+              <input type="range" id="pwmRange" min="0" max="100" value="0" />
+              <input type="number" id="pwmInput" min="0" max="100" value="0" />
+            </div>
+            <p class="sub-hint">Gửi <code>pwm</code> (0–255) lên <code>/Data/Car</code>. Hiển thị là % để dễ điều khiển.</p>
+          </div>
+
+          <!-- Lights -->
+          <div class="aux">
+            <button id="btnLights" class="btn toggle" title="Toggle lights">
+              <i class="fa-regular fa-lightbulb"></i> Lights
+            </button>
+          </div>
+          <!-- Live State (no RTDB) -->
+<div class="state-box">
+  <div class="panel-head" style="margin-top:10px">
+    <h2 class="panel-title">Live State (no RTDB)</h2>
+  </div>
+  <div class="state-grid">
+    <div><span>Forward</span><span id="s-forward" class="pill">0</span></div>
+    <div><span>Left</span><span id="s-left" class="pill">0</span></div>
+    <div><span>Right</span><span id="s-right" class="pill">0</span></div>
+    <div><span>Back</span><span id="s-back" class="pill">0</span></div>
+    <div><span>Lights</span><span id="s-lights" class="pill">0</span></div>
+    <div><span>PWM</span><span id="s-pwm" class="pill">0</span></div>
+    <div class="combo-row"><span>Combo</span><span id="s-combo" class="pill">-</span></div>
+  </div>
+  <p class="sub-hint">Hiển thị trực tiếp giá trị nút (0/1) và tổ hợp phím đang nhấn (ví dụ: W+D → Forward+Right).</p>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>KC326E | Group 6</footer>
+
+  <!-- Shared Scripts -->
+  <script type="module" src="html/firebase-core.js"></script>
+  <script type="module" src="html/navbar-loader.js"></script>
+  <script type="module" src="html/wifi.js"></script>
+
+  <!-- Page Script -->
+  <script type="module" src="js/car-control.js"></script>
+</body>
+</html>

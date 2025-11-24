@@ -1,0 +1,439 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* ===== THEME XANH LÁ SÁNG ===== */
+  --bg: radial-gradient(circle at 20% 10%, #e9fff3 0%, #d3ffe6 35%, #bbf5d6 65%, #9ae6c0 100%);
+  --active: radial-gradient(circle at 30% 30%, #25cc83 0%, #15b16d 45%, #0a7f4d 90%);
+  --gray: rgba(255, 255, 255, 0.65);
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-border: rgba(139, 214, 165, 0.45);
+  --card-shadow: 0 14px 40px rgba(71, 138, 101, 0.16);
+  --text: #203329;
+  --text-muted: rgba(32, 51, 41, 0.6);
+  --danger-bg: rgba(242, 65, 85, 0.12);
+  --danger-border: rgba(242, 65, 85, 0.6);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-top: 90px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+/* ===== TITLE / HEADER ===== */
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.page-title h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+  text-shadow: 0 3px 12px rgba(248, 255, 248, 0.5);
+}
+.subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.badge-online {
+  background: rgba(24, 187, 115, 0.12);
+  border: 1px solid rgba(7, 145, 90, 0.4);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0c5a3a;
+  box-shadow: 0 6px 15px rgba(12, 127, 71, 0.2);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #2fff9f;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(47, 255, 159, 0.8);
+}
+#status {
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== CARD ===== */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  padding: 20px 22px 16px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 20px;
+}
+.card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.card-head h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+}
+.card-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  border-radius: 14px;
+  overflow: hidden;
+}
+thead {
+  background: rgba(214, 248, 225, 0.9);
+  backdrop-filter: blur(4px);
+}
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+th {
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  color: #174128;
+}
+tbody tr {
+  background: rgba(255, 255, 255, 0.35);
+  transition: 0.2s ease;
+}
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.2);
+}
+tbody tr:hover {
+  background: rgba(93, 213, 145, 0.2);
+  transform: scale(1.002);
+  box-shadow: inset 0 1px 0 rgba(161, 225, 181, 0.3);
+}
+
+/* ===== TAGS (DETECTION) ===== */
+.tag {
+  display: inline-block;
+  min-width: 52px;
+  padding: 3px 10px 4px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(40, 142, 92, 0.15);
+}
+.tag.area1 { background: rgba(27, 160, 77, 0.96); }
+.tag.area2 { background: rgba(40, 177, 95, 0.95); }
+.tag.area3 { background: rgba(59, 196, 115, 0.95); }
+.tag.area4 { background: rgba(89, 213, 133, 0.95); }
+
+/* ====== ĐÁNH DẤU Ô CÓ SÂU BỆNH ====== */
+/* trong JS chỉ cần thêm class .danger vào span */
+.tag.danger,
+.tag.has-detect {
+  background: rgba(237, 71, 71, 0.92);
+  border: 1px solid rgba(255, 139, 139, 0.85);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(237, 71, 71, 0.45);
+}
+
+/* ===== LOGIN STATUS BADGE ===== */
+.login-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.login-success {
+  background: rgba(19, 150, 98, 0.15);
+  color: #166a45;
+  border: 1px solid rgba(13, 130, 82, 0.35);
+}
+.login-fail {
+  background: rgba(248, 96, 124, 0.12);
+  color: #96304b;
+  border: 1px solid rgba(248, 96, 124, 0.28);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 0.75rem;
+  background: radial-gradient(circle at top, rgba(193, 246, 204, 0.4) 0%, rgba(202, 255, 221, 0) 70%);
+  backdrop-filter: blur(3px);
+  z-index: 2;
+  border-top: 1px solid rgba(171, 230, 188, 0.6);
+  color: rgba(24, 56, 38, 0.7);
+}
+
+/* ===== ẨN PANEL ===== */
+.data-panel.hidden {
+  display: none;
+}
+
+/* ===== OVERLAY ===== */
+.data-dim-layer {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(118, 226, 159, 0.15) 0%, rgba(5, 74, 46, 0.45) 80%);
+  backdrop-filter: blur(3px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.18s ease;
+}
+.data-dim-layer.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== RADIAL MENU ===== */
+.radial-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 110px;
+  height: 110px;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.radial-menu .menu-toggle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 118px;
+  height: 118px;
+  -webkit-mask: radial-gradient(circle 115px at 0 100%, #000 54%, transparent 55%);
+  mask: radial-gradient(circle 115px at 0 100%, #000 54%, transparent 55%);
+  background: radial-gradient(circle at 0 100%, rgba(88, 250, 186, 0.95) 0%, rgba(26, 177, 115, 1) 45%, rgba(0, 0, 0, 0) 100%);
+  border: 1px solid rgba(144, 255, 206, 0.55);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-right: 16px;
+  cursor: pointer;
+  z-index: 101;
+  pointer-events: auto;
+  box-shadow: 0 6px 18px rgba(7, 117, 81, 0.25);
+  transition: 0.18s ease;
+}
+
+.menu-toggle .menu-toggle-inner {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  width: 46px;
+  height: 46px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+}
+
+.menu-toggle .main-icon {
+  font-size: 1.2rem;
+  color: #0a5434;
+  text-shadow: 0 4px 10px rgba(16, 116, 76, 0.35);
+}
+
+.menu-toggle .menu-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(20, 70, 47, 0.9);
+  letter-spacing: 0.02rem;
+}
+
+.radial-menu.open .menu-toggle {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 26px rgba(9, 153, 95, 0.38);
+}
+
+.radial-menu .menu-items {
+  position: absolute;
+  bottom: 12px;
+  left: 64px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.radial-menu .menu-item {
+  --tx: 0px;
+  --ty: 0px;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(148, 214, 171, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #13452d;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.07);
+  transform: translate(0, 0) scale(0);
+  opacity: 0;
+  transition: 0.22s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  font-size: 1.02rem;
+}
+
+.radial-menu.open .menu-item {
+  opacity: 1;
+  transform: translate(var(--tx), var(--ty)) scale(1);
+  z-index: 102;
+}
+
+/* vị trí 3 nút */
+.radial-menu.open .menu-item.item-1 { --tx: 20px;  --ty: -20px; }
+.radial-menu.open .menu-item.item-2 { --tx: 5px;  --ty: -50px; }
+.radial-menu.open .menu-item.item-3 { --tx: -15px; --ty: -80px; }
+.radial-menu.open .menu-item.item-4 { --tx: -45px; --ty: -100px;  } 
+
+.radial-menu .menu-item.active {
+  background: var(--active);
+  color: #fff;
+  border-color: rgba(136, 254, 208, 0.9);
+  box-shadow: 0 12px 24px rgba(16, 153, 111, 0.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  table { font-size: 0.8rem; }
+  th, td { padding: 7px 6px; }
+
+  .page-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .radial-menu {
+    bottom: 50px;
+  }
+}
+
+/* tô đỏ cho dòng sensor lệch chuẩn */
+.row-alert {
+  background: rgba(237, 71, 71, 0.09) !important;
+  border-left: 3px solid rgba(237, 71, 71, 0.7);
+}
+
+/* Hiệu ứng hover cho icon menu */
+.radial-menu.open .menu-item {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+  will-change: transform;
+}
+
+/* Hover: giữ translate, chỉ scale + shadow */
+.radial-menu.open .menu-item:hover {
+  transform: translate(var(--tx), var(--ty)) scale(1.15);
+  box-shadow: 0 14px 26px rgba(16, 153, 111, 0.35), 0 2px 4px rgba(0,0,0,0.08) inset;
+}
+
+/* Active (đang chọn) + hover: vẫn ưu tiên nền active nhưng cho glow nhẹ */
+.radial-menu.open .menu-item.active:hover {
+  background: var(--active);
+  color: #fff;
+  border-color: rgba(136, 254, 208, 0.9);
+  transform: translate(var(--tx), var(--ty)) scale(1.12);
+  box-shadow: 0 16px 28px rgba(16, 153, 111, 0.45);
+}
+
+/* Feedback khi nhấn giữ */
+.radial-menu.open .menu-item:active {
+  transform: translate(var(--tx), var(--ty)) scale(0.95);
+}
+
+/* Hỗ trợ bàn phím (Tab) */
+.radial-menu.open .menu-item:focus-visible {
+  outline: none;
+  transform: translate(var(--tx), var(--ty)) scale(1.15);
+  box-shadow: 0 0 0 3px rgba(136, 254, 208, 0.9), 0 10px 22px rgba(16,153,111,0.35);
+}
+
+.btn-export{
+  appearance: none;
+  border: 1px solid rgba(20,140,90,.35);
+  background: rgba(255,255,255,.85);
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: .8rem;
+  cursor: pointer;
+  margin: -4px 0 10px auto; /* đẩy xuống ngay dưới card-head */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+.btn-export:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+.btn-export:active{ transform: translateY(0); }
+.btn-export::before{ content: "⬇️"; font-size: .9rem; }
+
+.btn-row{
+  display:inline-flex;
+  gap:10px;
+  margin: -4px 0 10px 0;
+}
+
+.btn-export-all{
+  appearance: none;
+  border: 1px solid rgba(20,140,90,.35);
+  background: rgba(255,255,255,.85);
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: .8rem;
+  cursor: pointer;
+  margin: -4px 0 10px auto; /* đẩy xuống ngay dưới card-head */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+.btn-export-all:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+.btn-export-all:active{ transform: translateY(0); }
+.btn-export-all::before{ content: "📗"; font-size: .9rem; }
+
+

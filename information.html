@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Information | Team Members</title>
+  <link rel="stylesheet" href="css/information.css" />
+  <link rel="stylesheet" href="html/navbar.css">
+  <link rel="stylesheet" href="html/header.css">
+  <link rel="stylesheet" href="html/wifi.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <header class="header-black">
+    <div id="navbar"></div>
+  </header>
+
+  <section class="hero">
+    <h1>Team 5 Members</h1>
+    <p class="subtitle">Hover a card to focus · Click to see details</p>
+
+    <!-- ====== CAROUSEL WRAPPER ====== -->
+    <div class="team-carousel" id="teamCarousel">
+      <!-- Member 1 -->
+      <div class="member-card active" data-member="1">
+        <img src="image/mytran.png" alt="Member 1" />
+        <h3>Nguyen Hai San</h3>
+        <p class="role">Report writing · Hardware setup</p>
+        <p class="id">Student ID: B2207426</p>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="member-card" data-member="2">
+        <img src="image/truc.png" alt="Member 2" />
+        <h3>Lam Nha Truc</h3>
+        <p class="role">ESP32 programming · Presentation slides</p>
+        <p class="id">Student ID: B2207445</p>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="member-card" data-member="3">
+        <img src="image/vinh.png" alt="Member 3" />
+        <h3>Nguyen Phuc Vinh</h3>
+        <p class="role">ESP32 + Firebase integration</p>
+        <p class="id">Student ID: B2207449</p>
+      </div>
+
+      <!-- Member 4 -->
+      <div class="member-card" data-member="4">
+        <img src="image/Triet.png" alt="Member 4" />
+        <h3>Tran Huu Triet</h3>
+        <p class="role">Circuit design</p>
+        <p class="id">Student ID: B2207444</p>
+      </div>
+
+      <!-- Member 5 -->
+      <div class="member-card" data-member="5">
+        <img src="image/tu.png" alt="Member 5" />
+        <h3>Nguyen Quoc Tu</h3>
+        <p class="role">UI / Web interface</p>
+        <p class="id">Student ID: B2207447</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== POPUP ===== -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span id="closePopup">&times;</span>
+      <img id="popupImg" src="" alt="Member" />
+      <h2 id="popupName"></h2>
+      <p><strong>Student ID:</strong> <span id="popupId"></span></p>
+      <p><strong>Role:</strong> <span id="popupJob"></span></p>
+      <p><strong>Gender:</strong> <span id="popupGender"></span></p>
+      <p><strong>Hobbies:</strong> <span id="popupHobby"></span></p>
+    </div>
+  </div>
+  <!-- JS wifi floating -->
+  <div id="wifiMonitor" class="wifi-floating wifi-offline">
+      <div class="wifi-circle">
+          <span class="wifi-bar bar1"></span>
+          <span class="wifi-bar bar2"></span>
+          <span class="wifi-bar bar3"></span>
+          <span class="wifi-dot"></span>
+          <span class="wifi-slash"></span>
+      </div>
+      <div class="wifi-hint" id="wifiHint">WiFi: offline</div>
+  </div>
+  <footer>KC326E | Group 6</footer>
+  <!-- 1) core firebase -->
+  <script type="module" src="html/firebase-core.js"></script>
+  <!-- 2) load navbar + logout -->
+  <script type="module" src="html/navbar-loader.js"></script>
+  <script type="module" src="js/information.js"></script>
+  <script type="module" src="html/wifi.js"></script>
+</body>
+</html>
