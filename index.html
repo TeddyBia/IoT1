@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thông số Rau | Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="auto.html">Auto</a></li>
+        <li><a href="information.html">Information</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Thông số phù hợp cho từng loại rau</h1>
+
+    <!-- Góc hiển thị Wi-Fi -->
+<div class="wifi-indicator">
+  <i id="wifiIcon" class="fa-solid fa-wifi wifi-strong"></i>
+</div>
+
+
+
+    <div class="main-container">
+      <!-- Thanh menu dọc -->
+      <div class="sidebar">
+        <button class="tab-btn" data-target="content1">🥬</button>
+        <button class="tab-btn" data-target="content2">🌿</button>
+        <button class="tab-btn" data-target="content3">🥕</button>
+      </div>
+
+      <!-- Nội dung -->
+      <div class="content-box">
+        <div id="content1" class="tab-content active">
+          <p>🌱 Nội dung cải ngọt...</p>
+        </div>
+        <div id="content2" class="tab-content">
+          <p>🌿 Nội dung mùng tơi...</p>
+        </div>
+        <div id="content3" class="tab-content">
+          <p>🥕 Nội dung cải củ...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>KC326E | Nhóm 6</footer>
+
+  <!-- 🔥 Quan trọng: phải là module -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

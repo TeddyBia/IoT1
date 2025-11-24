@@ -1,0 +1,154 @@
+/* Tổng thể */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(145deg, #71bbad, #71bbad);
+  color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(8, 97, 91, 0.95);  /* màu xanh đậm */
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 5px 40px;                  /* 👈 giảm padding (độ dày thanh) */
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  font-size: 1.2rem;                    /* 👈 giảm cỡ chữ một chút */
+  line-height: 0.5;                     /* 👈 giảm khoảng cách dọc của chữ */
+}
+
+/* ===== MENU ITEMS ===== */
+.nav-links {
+  display: flex;
+  gap: 40px;                          /* 👈 giảm khoảng cách giữa các chữ */
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 2;                     /* 👈 thu gọn chiều cao dòng */
+  padding: 4px 0;                     /* 👈 giảm padding của từng chữ */
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Thẻ thành viên */
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.member-card {
+  background: rgba(28, 220, 31, 0.1);
+  border-radius: 20px;
+  width: 220px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 5px 20px rgba(18, 14, 222, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.member-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(53, 9, 201, 0.6);
+}
+
+.member-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.member-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.1rem;
+}
+
+.member-card p {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* Popup chi tiết */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.popup-content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 30px 40px;
+  text-align: center;
+  width: 320px;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+#closePopup {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s;
+}
+
+#closePopup:hover {
+  color: #1f0ade;
+}

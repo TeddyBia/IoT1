@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #fff8f1, #ffe0b2);
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: rgba(255, 138, 0, 0.9);
+  border-radius: 25px;
+  padding: 10px 40px;
+  width: fit-content;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  font-size: 1.2rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  color: #e65100;
+  margin-bottom: 30px;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  width: 90%;
+  color: #333;
+}
+
+/* SWITCH */
+.switch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.switch {
+  position: relative;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #ff9800;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* INPUTS */
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.inputs input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+button#updatePID {
+  background: #ff9800;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button#updatePID:hover {
+  background: #f57c00;
+}
+
+/* SLIDERS */
+.sliders label {
+  display: block;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #ff9800;
+}
+
+/* MAIN PANEL (2 COLUMNS) */
+.main-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 460px;
+  color: #333;
+}
+
+.panel h2 {
+  color: #e65100;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Disabled state when autoMode OFF */
+.inputs.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.status-box {
+  margin-top: 16px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.ghost-btn {
+  margin-top: 10px;
+  background: transparent;
+  border: 2px solid #ff9800;
+  color: #e65100;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.ghost-btn:hover { background: rgba(255,152,0,.1); }
+
+/* === CUSTOM STYLE FOR SAVE MISTING CONFIG BUTTON === */
+button#updateMisting {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+  width: 100%;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+button#updateMisting:hover {
+  background: linear-gradient(135deg, #ffa726, #fb8c00);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(255, 152, 0, 0.6);
+}
+
+button#updateMisting:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(255, 152, 0, 0.5);
+}
+

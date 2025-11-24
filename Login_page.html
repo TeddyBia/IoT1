@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="page_style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Firebase v8 CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+
+<body>
+  <form class="login_form">
+    <h1 class="login_title">Login</h1>
+
+    <div class="input_box">
+      <i class="fa-solid fa-user"></i>
+      <input type="email" id="username" placeholder="Email" autocomplete="username" required />
+    </div>
+
+    <div class="input_box">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" id="password" placeholder="Password" autocomplete="current-password" required />
+    </div>
+
+    <div class="remember_forget_box">
+      <label for="remember">
+        <input type="checkbox" id="remember" />
+        Remember
+      </label>
+      <a href="#" id="forgot">Forgot Password</a>
+    </div>
+
+    <button class="login_btn" type="submit">Login</button>
+    <p class="register">
+      Don't have an account?
+      <a href="#" id="register">Register</a>
+    </p>
+
+    <div class="messege_box"></div>
+  </form>
+
+  <script>
+    // ======= Firebase Config (v8) =======
+    var firebaseConfig = {
+      apiKey: "AIzaSyDAPC5R3FZdiwmzO26T2gvVMUHO98CChdA",
+      authDomain: "kc326e.firebaseapp.com",
+      databaseURL: "https://kc326e-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "kc326e",
+      storageBucket: "kc326e.firebasestorage.app",
+      messagingSenderId: "1073378109515",
+      appId: "1:1073378109515:web:fba12dc5702ded368a85ce"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // ======= UI refs =======
+    const form = document.querySelector(".login_form");
+    const emailEl = document.getElementById("username");
+    const passEl  = document.getElementById("password");
+    const remember = document.getElementById("remember");
+    const btn = document.querySelector(".login_btn");
+    const msg = document.querySelector(".messege_box");
+    const forgotBtn = document.getElementById("forgot");
+
+    function showMsg(text, type) {
+      msg.textContent = text;
+      msg.classList.remove("error", "created");
+      if (type === "error") msg.classList.add("error");
+      if (type === "ok") msg.classList.add("created");
+    }
+
+    function setBusy(busy) {
+      btn.disabled = busy;
+      btn.textContent = busy ? "Processing..." : "Login";
+}
+
+    // ======= Forgot Password (optional) =======
+    forgotBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const email = emailEl.value.trim();
+      if (!email) {
+        showMsg("📧 Nhập email để nhận link đặt lại mật khẩu.", "error");
+        return;
+      }
+      try {
+        await firebase.auth().sendPasswordResetEmail(email);
+        showMsg("✅ Đã gửi email đặt lại mật khẩu.", "ok");
+      } catch (err) {
+        console.error(err);
+        showMsg("🚫 Không gửi được email đặt lại mật khẩu.", "error");
+      }
+    });
+
+    // ======= Submit form: Login =======
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = emailEl.value.trim();
+      const password = passEl.value;
+
+      if (!email || !password) {
+        showMsg("⚠️ Vui lòng nhập đầy đủ Email và Mật khẩu!", "error");
+        return;
+      }
+
+      try {
+        setBusy(true);
+
+        // Persistence theo checkbox Remember (LOCAL vs SESSION)
+        await firebase.auth().setPersistence(
+          remember.checked
+            ? firebase.auth.Auth.Persistence.LOCAL
+            : firebase.auth.Auth.Persistence.SESSION
+        );
+
+        // Đăng nhập
+        const cred = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const user = cred.user;
+
+        // Ghi log vào RTDB
+        const userRef = firebase.database().ref("users/" + user.uid);
+        const snap = await userRef.once("value");
+        const loginCount = snap.exists() && snap.val().login_count ? snap.val().login_count : 0;
+
+        await userRef.update({
+          email: user.email,
+          last_login: new Date().toISOString(),
+          login_count: loginCount + 1
+        });
+
+        showMsg("✅ Đăng nhập thành công!", "ok");
+
+        // Chuyển trang
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 600);
+      } catch (error) {
+        console.error(error);
+        let errMsg = "🚫 Lỗi khi đăng nhập!";
+        switch (error.code) {
+          case "auth/invalid-email":
+            errMsg = "🚫 Email không hợp lệ!"; break;
+          case "auth/user-disabled":
+            errMsg = "🚫 Tài khoản đã bị vô hiệu hóa!"; break;
+          case "auth/user-not-found":
+            errMsg = "❌ Tài khoản không tồn tại!"; break;
+          case "auth/wrong-password":
+            errMsg = "❌ Sai mật khẩu!"; break;
+          case "auth/too-many-requests":
+            errMsg = "🚫 Thử lại sau: đăng nhập sai quá nhiều lần!"; break;
+        }
+        showMsg(errMsg, "error");
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    // ======= Nếu đã đăng nhập rồi thì vào thẳng index.html =======
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
