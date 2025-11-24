@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vegetable Parameters | Home</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="html/navbar.css" />
+    <link rel="stylesheet" href="html/header.css" />
+    <link rel="stylesheet" href="html/wifi.css" />
+</head>
+
+<body>
+    <header class="header-green">
+        <div id="navbar"></div>
+    </header>
+
+    <section class="hero">
+        <h1 class="main-title">Select a Vegetable</h1>
+
+        <div class="carousel-container">
+            <div class="carousel">
+
+                <div class="veg-card active" data-index="0" data-plant="content1">
+                    <div class="veg-inner">
+                        <div class="veg-icon">🌱</div>
+                        <div class="veg-name">Pak Choi</div>
+                    </div>
+                </div>
+
+                <div class="veg-card" data-index="1" data-plant="content2">
+                    <div class="veg-inner">
+                        <div class="veg-icon">🥬</div>
+                        <div class="veg-name">Bok choy</div>
+                    </div>
+                </div>
+
+                <div class="veg-card" data-index="2" data-plant="content3">
+                    <div class="veg-inner">
+                        <div class="veg-icon">🥕</div>
+                        <div class="veg-name">Radish</div>
+                    </div>
+                </div>
+
+                <div class="veg-card" data-index="3" data-plant="content4">
+                    <div class="veg-inner">
+                        <div class="veg-icon">🌿</div>
+                        <div class="veg-name">Spinach</div>
+                    </div>
+                </div>
+
+                <div class="veg-card" data-index="4" data-plant="content5">
+                    <div class="veg-inner">
+                        <div class="veg-icon">🥦</div>
+                        <div class="veg-name">Broccoli</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="veg-popup" id="vegPopup">
+        <div class="veg-popup-content">
+            <button class="popup-close" id="popupClose">&times;</button>
+
+            <div class="popup-avatar-wrap">
+                <div class="popup-avatar" id="popupAvatar">🥬</div>
+            </div>
+
+            <h2 id="popupTitle">Pak Choi</h2>
+            <p id="popupTemp">Temperature: 25 – 30°C</p>
+            <p id="popupHumi">Humidity: 70 – 85%</p>
+            <p id="popupDesc">…</p>
+        </div>
+    </div>
+
+    <div id="wifiMonitor" class="wifi-floating wifi-offline">
+        <div class="wifi-circle">
+            <span class="wifi-bar bar1"></span>
+            <span class="wifi-bar bar2"></span>
+            <span class="wifi-bar bar3"></span>
+            <span class="wifi-dot"></span>
+            <span class="wifi-slash"></span>
+        </div>
+        <div class="wifi-hint" id="wifiHint">WiFi: offline</div>
+    </div>
+
+    <footer>KC326E | Group 6</footer>
+
+    <script type="module" src="html/firebase-core.js"></script>
+    <script type="module" src="html/navbar-loader.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="html/wifi.js"></script>
+</body>
+</html>

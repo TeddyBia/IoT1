@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="page_style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Firebase v8 CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+
+<body>
+  <!-- container để căn giữa -->
+  <div class="auth-wrapper">
+    <form class="login_form">
+      <!-- avatar nổi -->
+      <div class="avatar-box">
+        <img src="./image/back_3.jpg" alt="User avatar">
+      </div>
+
+      <!-- tiêu đề + mô tả nhỏ -->
+      <div class="title-box">
+        <h1 class="login_title">Welcome to our project</h1>
+        <p class="login_subtitle">Sign in to continue to your dashboard</p>
+      </div>
+
+      <!-- input -->
+      <div class="input_box">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" id="username" placeholder="Email address" autocomplete="username" required />
+      </div>
+
+      <div class="input_box">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password" required />
+        <i class="fa-solid fa-eye-slash toggle_eye" id="togglePassword"></i>
+      </div>
+
+      <div class="remember_forget_box">
+        <label for="remember">
+          <input type="checkbox" id="remember" />
+          Remember me
+        </label>
+        <a href="#" id="forgot">Forgot password?</a>
+      </div>
+
+      <button class="login_btn" type="submit">
+        <span>Login</span>
+        <!-- <i class="fa-solid fa-arrow-right"></i> -->
+      </button>
+
+      <p class="divider"><span>or continue with</span></p>
+
+      <div class="social-row">
+        <button type="button" class="social-btn"><i class="fa-brands fa-google"></i></button>
+        <button type="button" class="social-btn"><i class="fa-brands fa-github"></i></button>
+        <button type="button" class="social-btn"><i class="fa-brands fa-facebook-f"></i></button>
+      </div>
+
+      <p class="register">
+        Don't have an account?
+        <a href="#" id="register">Create one</a>
+      </p>
+
+      <div class="messege_box"></div>
+    </form>
+  </div>
+
+  <script>
+    // ======= Firebase Config (v8) =======
+    var firebaseConfig = {
+      apiKey: "AIzaSyC-wfBTitH3VO9hbINx7dUqgUMNJi_BYVo",
+      authDomain: "kc326e-1.firebaseapp.com",
+      databaseURL: "https://kc326e-1-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "kc326e-1",
+      storageBucket: "kc326e-1.firebasestorage.app",
+      messagingSenderId: "758660267895",
+      appId: "1:758660267895:web:10a708ab2d5aff3ecceb72"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.auth().signOut().catch(console.error);
+
+    // ======= UI refs =======
+    const form = document.querySelector(".login_form");
+    const emailEl = document.getElementById("username");
+    const passEl  = document.getElementById("password");
+    const remember = document.getElementById("remember");
+    const btn = document.querySelector(".login_btn");
+    const msg = document.querySelector(".messege_box");
+    const forgotBtn = document.getElementById("forgot");
+
+    // toggle password
+    const toggleEye = document.getElementById("togglePassword");
+    toggleEye.addEventListener("click", () => {
+      const isHidden = passEl.type === "password";
+      passEl.type = isHidden ? "text" : "password";
+      toggleEye.classList.toggle("fa-eye");
+      toggleEye.classList.toggle("fa-eye-slash");
+    });
+
+    // ======= HÀM GHI LOG =======
+    function logLoginAttempt(email, status) {
+      const now = new Date();
+      // format: YYYY-MM-DD HH:mm:ss
+      const formattedTime =
+        now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0") + " " +
+        String(now.getHours()).padStart(2, "0") + ":" +
+        String(now.getMinutes()).padStart(2, "0") + ":" +
+        String(now.getSeconds()).padStart(2, "0");
+
+      const loginRef = firebase.database().ref("Login");
+      return loginRef.set({
+        email: email || "(empty)",
+        loginStat: status,      // "Success" | "Fail"
+        time: formattedTime     // "2025-11-02 20:45:31"
+      });
+    }
+
+
+    function showMsg(text, type) {
+      msg.textContent = text;
+      msg.classList.remove("error", "created");
+      if (type === "error") msg.classList.add("error");
+      if (type === "ok") msg.classList.add("created");
+    }
+
+    function setBusy(busy) {
+      btn.disabled = busy;
+      btn.classList.toggle("loading", busy);
+    }
+
+    // forgot
+    forgotBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const email = emailEl.value.trim();
+      if (!email) {
+        showMsg("📧 Enter your email to reset password.", "error");
+        return;
+      }
+      try {
+        await firebase.auth().sendPasswordResetEmail(email);
+        showMsg("✅ Password reset email sent.", "ok");
+      } catch (err) {
+        console.error(err);
+        showMsg("🚫 Failed to send password reset email.", "error");
+      }
+    });
+
+    // submit
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = emailEl.value.trim();
+      const password = passEl.value;
+
+      if (!email || !password) {
+        showMsg("⚠️ Please enter both email and password!", "error");
+        return;
+      }
+
+      try {
+        setBusy(true);
+        await firebase.auth().setPersistence(
+          remember.checked
+            ? firebase.auth.Auth.Persistence.LOCAL
+            : firebase.auth.Auth.Persistence.SESSION
+        );
+
+        const cred = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const user = cred.user;
+
+        showMsg("✅ Login successful!", "ok");
+        await logLoginAttempt(user.email, "Success");
+
+        setTimeout(() => {
+          window.location.href = "details.html";
+        }, 500);
+      } catch (error) {
+        console.error(error);
+        let errMsg = "🚫 Login failed!";
+        switch (error.code) {
+          case "auth/invalid-email":
+            errMsg = "🚫 Invalid email!"; break;
+          case "auth/user-disabled":
+            errMsg = "🚫 This account has been disabled!"; break;
+          case "auth/user-not-found":
+            errMsg = "❌ Account does not exist!"; break;
+          case "auth/wrong-password":
+            errMsg = "❌ Wrong password!"; break;
+          case "auth/too-many-requests":
+            errMsg = "🚫 Too many attempts, please try again later!"; break;
+        }
+        showMsg(errMsg, "error");
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log("Already signed in as:", user.email);
+      }
+    });
+  </script>
+</body>
+</html>

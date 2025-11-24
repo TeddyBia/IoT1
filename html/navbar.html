@@ -1,0 +1,55 @@
+<nav class="navbar">
+  <!-- Logout button (left) -->
+  <div class="logout-btn" id="logoutBtn" title="Logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+  </div>
+
+  <!-- Menu center -->
+  <ul class="nav-links">
+    <li><a href="details.html">Home</a></li>
+    <li><a href="state.html">State</a></li>
+    <li><a href="tracking.html">Track</a></li>
+    <li><a href="auto-control.html">Auto Ctrl</a></li>
+    <li><a href="auto-detect.html">Auto Detect</a></li>
+    <li><a href="data.html">Data</a></li>
+    <!-- <li><a href="car-control.html">Car Control</a></li> -->
+    <li><a href="information.html">Info</a></li>
+  </ul>
+
+  <!-- 🆕 WiFi manager (top-right) -->
+  <div class="wifi-card" id="wifiCard">
+    <div class="wifi-card-header">
+      <span>WiFi manager</span>
+      <i class="fa-solid fa-wifi"></i>
+    </div>
+
+    <div class="wifi-card-modes">
+      <button data-mode="add" class="active">Add</button>
+      <button data-mode="change">Change</button>
+      <button data-mode="delete">Delete</button>
+    </div>
+
+    <div class="wifi-card-body">
+      <!-- row 1: SSID -->
+      <input type="text" id="wifiSsidInput" placeholder="SSID" autocomplete="off" />
+
+      <!-- row 2: current password -->
+      <div class="input-wrap">
+        <input type="password" id="wifiPwdInput" placeholder="Password" autocomplete="off" />
+        <i class="fa-solid fa-eye-slash toggle-eye" data-target="wifiPwdInput"></i>
+      </div>
+
+      <!-- row 3: new password (only for change) -->
+      <div class="input-wrap" id="newPwdWrap" style="display:none">
+        <input type="password" id="wifiNewPwdInput" placeholder="New password" autocomplete="off" />
+        <i class="fa-solid fa-eye-slash toggle-eye" data-target="wifiNewPwdInput"></i>
+      </div>
+
+      <button id="wifiSaveBtn" title="Apply to RTDB">
+        <i class="fa-solid fa-floppy-disk"></i>
+      </button>
+    </div>
+
+    <p class="wifi-card-hint" id="wifiHintText">Mode: Add WiFi</p>
+  </div>
+</nav>
