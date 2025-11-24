@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_DETECT = "http://127.0.0.1:5000/api/rasp-detect";
-  const API_LOGIN  = "http://127.0.0.1:5000/api/login-stat";
-  const API_PLANT  = "http://127.0.0.1:5000/api/plant-details-sensor";
+  const API_BASE   = "https://colorado-rural-nails-retro.trycloudflare.com";
+
+  const API_DETECT = `${API_BASE}/api/rasp-detect`;
+  const API_LOGIN  = `${API_BASE}/api/login-stat`;
+  const API_PLANT  = `${API_BASE}/api/plant-details-sensor`;
 
   const statusEl    = document.getElementById("status");
   const tbodyDetect = document.getElementById("tbody-detect");
@@ -527,3 +529,4 @@ function setupExportButtons(){
 setupExportButtons();
 
 });
+
