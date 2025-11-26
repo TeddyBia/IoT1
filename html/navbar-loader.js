@@ -79,6 +79,38 @@ function getPageName(path) {
   return last;
 }
 
+// Thay thế hàm getPageName cũ bằng hàm này
+function normalizePage(str) {
+  if (!str) return "details.html";
+
+  // bỏ query + hash nếu có
+  let clean = str.split("#")[0].split("?")[0];
+
+  // nếu là URL tương đối (index.html, ./auto, /auto-detect)
+  // thì chuẩn hóa thành pathname
+  try {
+    const u = new URL(clean, window.location.origin);
+    clean = u.pathname;
+  } catch (e) {
+    // nếu chỉ là plain string thì giữ nguyên
+  }
+
+  // bỏ dấu "/" ở cuối nếu có
+  if (clean.endsWith("/")) clean = clean.slice(0, -1);
+
+  // lấy phần sau cùng
+  let last = clean.split("/").pop(); // có thể là "", "index.html", "auto-detect"
+
+  // nếu rỗng → root → coi là details.html (hoặc index.html tùy bạn)
+  if (!last) return "details.html";
+
+  // nếu KHÔNG có dấu chấm → có thể là clean URL "/auto-detect" → thêm .html
+  if (!last.includes(".")) last = last + ".html";
+
+  return last.toLowerCase();
+}
+
+
 async function loadNavbar() {
   const navbarEl = document.getElementById("navbar");
   if (!navbarEl) return;
@@ -87,10 +119,16 @@ async function loadNavbar() {
   const html = await res.text();
   navbarEl.innerHTML = html;
 
-  const current = getPageName(window.location.pathname);
+  const current = normalizePage(window.location.pathname);
   const links = document.querySelectorAll(".nav-links a");
+
   links.forEach((link) => {
-    if (link.getAttribute("href") === current) link.classList.add("active");
+    const href = link.getAttribute("href");
+    const page = normalizePage(href);
+
+    if (page === current) {
+      link.classList.add("active");
+    }
   });
 
   // logout
