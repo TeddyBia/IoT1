@@ -425,6 +425,89 @@ async function loadNavbar() {
   document.body.appendChild(alertEl);
   refreshAlertPlantName();
 
+  // 💧 WATER LEVEL ALERT (mực nước phun sương – bên dưới envAlert)
+  ;(function injectWaterAlertStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
+      #waterAlert {
+        position: fixed;
+        top: 430px;           /* dưới envAlert (200px) */
+        right: 20px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 12px 14px;
+        width: 200px;
+        border-radius: 12px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid rgba(100, 100, 100, 0.18);
+        box-shadow: 0 8px 20px rgba(25,65,120,.15);
+        z-index: 999;
+      }
+      #waterAlert.warn  { 
+        color: #ec1212ff; 
+        border-color: rgba(255,107,107,.6); 
+        background: rgba(219,206,206,0.4); 
+      }
+      #waterAlert.blink { 
+        animation: pulse-alert 1.3s ease-out infinite;  /* dùng chung keyframes với envAlert */
+      }
+      #waterAlert .title { 
+        font-weight:700; 
+        font-size:15px; 
+        display:flex; 
+        align-items:center; 
+        gap:8px; 
+      }
+      #waterAlert .detail { 
+        font-weight:600; 
+        opacity:.9; 
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+
+  const waterEl = document.createElement("div");
+  waterEl.id = "waterAlert";
+  waterEl.innerHTML = `
+    <div class="title">
+      <i class="fa-solid fa-water"></i>
+      <span>Mực nước phun sương</span>
+    </div>
+    <div class="detail" id="waterText"></div>
+  `;
+  document.body.appendChild(waterEl);
+
+  function updateWaterAlertUI(minLvl, maxLvl) {
+    const textEl = document.getElementById("waterText");
+    if (!waterEl || !textEl) return;
+
+    const isMin = Number(minLvl) === 1;
+    const isMax = Number(maxLvl) === 1;
+
+    // ❌ Không cảnh báo
+    if (!isMin && !isMax) {
+      waterEl.style.display = "none";
+      waterEl.className = "";
+      textEl.textContent = "";
+      return;
+    }
+
+    // ✅ Có cảnh báo
+    waterEl.style.display = "flex";
+    waterEl.className = "warn blink";
+
+    if (isMin) {
+      textEl.textContent = "Mực nước thấp – cần châm thêm / Ngừng phun sương";
+    } else if (isMax) {
+      textEl.textContent = "Mực nước cao – ngưng bơm";
+    }
+  }
+
   function evaluateEnv(temp, hum) {
     const { tmin, tmax, hmin, hmax } = readThresholds();
 
@@ -478,12 +561,15 @@ async function loadNavbar() {
         const data = snap.val() || {};
         const temp = Number(data.Temperature ?? 0);
         const hum  = Number(data.Humidity   ?? 0);
+        const minLvl = Number(data.minLvl ?? 0);
+        const maxLvl = Number(data.maxLvl ?? 0);
 
         refreshPlantBadgeText();
         refreshAlertPlantName();
 
         const status = evaluateEnv(temp, hum);
         updateAlertUI(status);
+        updateWaterAlertUI(minLvl, maxLvl);
       });
     }
   } catch (err) {
