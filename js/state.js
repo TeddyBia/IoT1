@@ -162,8 +162,8 @@ function newChart(ctx, label, color, dataArr, yMin = 0, yMax = 100) {
 // 4 chart gốc
 const tempChart = newChart(ctxTemp, "Temperature (°C)", "#ff9800", tempData, 0, 100);
 const humChart  = newChart(ctxHum,  "Humidity (%)",    "#03a9f4", humData,  0, 100);
-const ldrChart  = newChart(ctxLdr,  "LDR (Light)",     "#4caf50", ldrData,  0, 50);
-const airChart  = newChart(ctxAir,  "Air Quality",     "#e91e63", airData,  0, 50);
+const ldrChart  = newChart(ctxLdr,  "LDR (Light)",     "#4caf50", ldrData,  0, 30000);
+const airChart  = newChart(ctxAir,  "Air Quality (PPM)",     "#e91e63", airData,  0, 1000);
 
 // ====== DATASET BIÊN (2 đường) ======
 function makeBoundDataset(label, color, value) {
@@ -343,8 +343,8 @@ function newCircleChart(ctx, color, maxValue) {
 const circleCharts = {
   Temperature: newCircleChart($("TemperatureChart"), "#ff9800", 100),
   Humminity:   newCircleChart($("HumminityChart"),  "#03a9f4", 100),
-  LDR:         newCircleChart($("LDRChart"),        "#4caf50", 50),
-  AirQuality:  newCircleChart($("AirQualityChart"), "#e91e63", 50),
+  LDR:         newCircleChart($("LDRChart"),        "#4caf50", 30000),
+  AirQuality:  newCircleChart($("AirQualityChart"), "#e91e63", 1000),
   WaterLevel:  newCircleChart($("WaterLevelChart"), "#00e676", 20),
 };
 
@@ -440,13 +440,13 @@ function updateCharts(data) {
   }
 
   const curTemp = data.Temperature ?? 0;
-  const curHumi = data.Humminity ?? 0;
+  const curHumi = data.Humidity ?? 0;
 
   labels.push(timeLabel);
   tempData.push(curTemp);
   humData.push(curHumi);
   ldrData.push(data.LDR ?? 0);
-  airData.push(data["Air Quality"] ?? 0);
+  airData.push(data.AirQuality ?? 0);
 
   // đẩy thêm điểm cho 4 đường biên (nếu có)
   if (tempChart.data.datasets[1] && state_tmin != null) {
@@ -537,9 +537,9 @@ onValue(sensorRef, (snapshot) => {
 
   const sensors = {
     Temperature: { val: data.Temperature ?? 0, max: 100, unit: "°C" },
-    Humminity:   { val: data.Humminity ?? 0, max: 100, unit: "%" },
-    LDR:         { val: data.LDR ?? 0, max: 50, unit: "LUX" },
-    AirQuality:  { val: data["Air Quality"] ?? 0, max: 50, unit: "AQI" },
+    Humminity:   { val: data.Humidity ?? 0, max: 100, unit: "%" },
+    LDR:         { val: data.LDR ?? 0, max: 30000, unit: "LUX" },
+    AirQuality:  { val: data["AirQuality"] ?? 0, max: 1000, unit: "PPM" },
     WaterLevel:  { val: data.WaterLevel ?? 0, max: 20, unit: "CM" },
   };
 
