@@ -374,7 +374,7 @@ if (db) {
   onValue(ref(db, "Data/Sensor"), (snap) => {
     const v = snap.val(); if (!v) return;
     const T = parseFloat(v.Temperature);
-    const M = parseFloat(v.Humminity);
+    const M = parseFloat(v.Humidity);
 
     if (!isNaN(T) && Tnow) Tnow.textContent = T.toFixed(1);
     if (!isNaN(M) && Mnow) Mnow.textContent = M.toFixed(1);
@@ -474,7 +474,7 @@ const DB_H_OFF = 2.0;       // %RH: OFF khi M > mmax + DB_H_OFF
 const Kp_hot = 18, Ki_hot = 0.08, Kd_hot = 6;   // quá nóng -> Fan/Servo
 const Kp_cold = 14, Ki_cold = 0.06, Kd_cold = 4; // quá lạnh -> LED
 const I_CLAMP = 200;                             // kẹp tích phân
-const OUT_MIN = 0, OUT_MAX = 100;                // % duty logic UI/thiết bị
+const OUT_MIN = 0, OUT_MAX = 255;                // % duty logic UI/thiết bị
 
 // --- Giới hạn tốc độ thay đổi output (%/chu kỳ runAuto) ---
 const SLEW_MAX = 10;
@@ -565,7 +565,7 @@ function runAuto(Traw, Hraw) {
   let yLed   = clampNum(uCold, OUT_MIN, OUT_MAX);
 
   // Servo mở theo mức nóng (tuyến tính 0..90)
-  let servoTarget = Math.round((yFan / 100) * 90);
+  let servoTarget = Math.round((yFan / 255) * 90);
 
   // 5) Slew-rate limit để mượt
   yFan = Math.round(slew(yFanPrev, yFan, SLEW_MAX));
