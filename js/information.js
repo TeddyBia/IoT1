@@ -28,7 +28,7 @@ const MEMBERS = [
     id: 1,
     name: "Nguyen Hai San",
     studentId: "B2207426",
-    role: "Report writing, hardware design",
+    role: "Presentation slides (Main), Hardware design",
     gender: "Male",
     hobby: "Electronics, football",
     img: "image/mytran.png"
@@ -37,7 +37,7 @@ const MEMBERS = [
     id: 2,
     name: "Lam Nha Truc",
     studentId: "B2207445",
-    role: "ESP32 programming, presentation slides",
+    role: "Code Programming ESP32 + Raspberry (Main), Presentation slides",
     gender: "Female",
     hobby: "Read book, Cooking",
     img: "image/truc.png"
@@ -46,7 +46,7 @@ const MEMBERS = [
     id: 3,
     name: "Nguyen Phuc Vinh",
     studentId: "B2207449",
-    role: "Code Programming ESP32 + Raspberry, Web interface / UI",
+    role: "Code Programming ESP32 + Raspberry, Web interface / UI (Main), Code React-Native",
     gender: "Male",
     hobby: "Backend stuff, gaming 🎮",
     img: "image/vinh.png"
@@ -55,7 +55,7 @@ const MEMBERS = [
     id: 4,
     name: "Tran Huu Triet",
     studentId: "B2207444",
-    role: "Circuit and hardware design",
+    role: "Circuit and Hardware design (Main)",
     gender: "Male",
     hobby: "Robotics, 3D models",
     img: "image/Triet.png"
@@ -64,7 +64,7 @@ const MEMBERS = [
     id: 5,
     name: "Nguyen Quoc Tu",
     studentId: "B2207447",
-    role: "Web interface / UI",
+    role: "Web interface / UI, Hardware design, Code React-native (Main)",
     gender: "Male",
     hobby: "Frontend, animations, music 🎧",
     img: "image/tu.png"
