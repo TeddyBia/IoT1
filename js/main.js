@@ -81,9 +81,9 @@ const PLANT_PRESETS = {
     details: "- Growth period: From sowing to harvest takes about <strong>6–10 days</strong>\n- The stems grow to a height of around  <strong>8–12 cm</strong>\n- Watering is done with a mist spray  <strong>1–2 times</strong> per day.\n- Maintain suitable temperature, when the temperature is low the plant grows slowly, when the temperature is high the plant is easily damaged by high temperature.\n- Humidity must be kept high but avoid waterlogging which can damage the seeds.\n- The light and temperature should not be too high, just at the right level."
   },
   content3: {
-    name: "Radish (Cải củ)",
-    tmin: 20, tmax: 25,
-    hmin: 70, hmax: 80,
+    name: "Bean sprouts (Giá đỗ)",
+    tmin: 25, tmax: 30,
+    hmin: 80, hmax: 95,
     details: "- Growth period: From sowing to harvest takes about <strong>5–7 days</strong>\n- Harvest when the stems turn  <strong>white and the red leaves become prominent</strong>\n- Water with a mist spray <strong>1–2 times</strong> per day.\n- Maintain suitable temperature, when the temperature is low the plant grows slowly, when the temperature is high the plant is easily damaged by high temperature.\n- Humidity must be kept high but avoid waterlogging which can damage the seeds.\n- The light and temperature should not be too high, just at the right level."
   },
   content4: {
@@ -291,3 +291,4 @@ document.addEventListener("DOMContentLoaded", () => {
   activeIndex = initIndex !== -1 ? initIndex : 0;
   updateCarousel();
 });
+
