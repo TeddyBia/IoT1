@@ -260,7 +260,7 @@ const frameStatus = document.getElementById("frameStatus");
 const cameraStatus = document.getElementById("cameraStatus");
 
 let lastFrameTs = 0;
-const MAX_STALE_MS = 2000; // 2s
+const MAX_STALE_MS = 20000; // 2s
 
 function setCameraOnline(isOnline) {
   cameraStatus.classList.toggle("online", isOnline);
@@ -371,4 +371,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 
