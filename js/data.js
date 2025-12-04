@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE   = "https://quote-thirty-prevent-dans.trycloudflare.com";
+  const API_BASE   = "https://domains-pupils-issn-bridal.trycloudflare.com";
 
   const API_DETECT = `${API_BASE}/api/rasp-detect`;
   const API_LOGIN  = `${API_BASE}/api/login-stat`;
@@ -529,5 +529,6 @@ function setupExportButtons(){
 setupExportButtons();
 
 });
+
 
 
